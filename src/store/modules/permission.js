@@ -38,7 +38,9 @@ const actions = {
               main.children.push(asyncRoutes[Smenu.SubDesc])
             }
         })
-        menus.push(main)
+        if (main.children.length !== 0 ) {
+          menus.push(main)
+        }
       })
       commit('SET_ROUTES', menus)
       resolve(menus)
