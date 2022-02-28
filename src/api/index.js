@@ -1,5 +1,7 @@
 import request from '@/utils/request'
 
+
+// 登录接口
 export function login(data) {
   return request({
     url: '/user/api/login',
@@ -8,11 +10,12 @@ export function login(data) {
   })
 }
 
-export function getInfo(data) {
+// 获取用户信息
+export function getUserInfo(data) {
   return request({
     url: '/user/api/users',
     method: 'get',
-    params: data
+    data  
   })
 }
 
@@ -127,12 +130,5 @@ export function addPerm(data) {
     url: "/perm/api/perms",
     method: "post",
     data
-  })
-}
-
-export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
   })
 }

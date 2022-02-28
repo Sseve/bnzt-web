@@ -30,142 +30,218 @@ import Layout from '@/layout'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+// 基本路由表
 export const constantRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
-
   {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: 'dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
-  },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
+// 静态路由表
+export const asyncRoutes = {
+  /*===================用户管理===================*/
+  // 一级菜单
+  "user": {
+    path: "/user",
+    component: Layout,
+    meta: {title: "用户管理", icon: "el-icon-menu"}
+  },
+  // 二级菜单
+  "用户列表": {
+    path: "/userlist",
+    component: () => import("@/views/user/userlist/index"),
+    meta: {title: "用户列表", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "角色列表": {
+    path: "/rolelist",
+    component: () => import("@/views/user/rolelist/index"),
+    meta: {title: "角色列表", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "权限列表": {
+    path: "/permlist",
+    component: () => import("@/views/user/permlist/index"),
+    meta: {title: "权限列表", icon: "el-icon-help"}
+  },
+  /*==================运营管理====================*/
+  // 一级菜单
+  "operation": {
+    path: "/operation",
+    component: Layout,
+    meta: {title: "运营管理", icon: "el-icon-menu"}
+  },
+  // 二级菜单
+  "充值排行": {
+    path: "/recharank",
+    component: () => import("@/views/operation/recharank/index"),
+    meta: {title: "充值排行", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "等级分布": {
+    path: "/gradedist",
+    component: () => import("@/views/operation/gradedist"),
+    meta: {title: "等级分布", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "滚服数据": {
+    path: "/rollsdata",
+    component: () => import("@/views/operation/rollsdata/index"),
+    meta: {title: "滚服数据", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "留存数据": {
+    path: "/retendata",
+    component: () => import("@/views/operation/retendata/index"),
+    meta: {title: "留存数据", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "LTV数据": {
+    path: "/ltvsdata",
+    component: () => import("@/views/operation/ltvsdata/index"),
+    meta: {title: "LTV数据", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "数据查询": {
+    path: "/countdata",
+    component: () => import("@/views/operation/countdata"),
+    meta: {title: "数据查询", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "VIP等级": {
+    path: "/vipsdata",
+    component: () => import("@/views/operation/vipsdata/index"),
+    meta: {title: "VIP等级", icon: "el-icon-help"}
+  },
+  /*===============玩家相关==============*/
+  // 一级菜单
+  "player": {
+    path: "/player",
+    component: Layout,
+    meta: {title: "玩家相关", icon: "el-icon-menu"}
+  },
+  // 二级菜单
+  "订单查询": {
+    path: "/orderdata",
+    component: () => import("@/views/player/orderdata/index"),
+    meta: {title: "订单查询", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "货币查询": {
+    path: "/currdata",
+    component: () => import("@/views/player/currdata/index"),
+    meta: {title: "货币查询", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "角色查询": {
+    path: "/roledata",
+    component: () => import("@/views/player/roledata/index"),
+    meta: {title: "角色查询", icon: "el-icon-help"}
+  },
+  /*==============gm工具===============*/
+  // 一级菜单
+  "gmtools": {
+    path: "/gmtools",
+    component: Layout,
+    meta: {title: "GM工具", icon: "el-icon-menu"}
+  },
+  // 二级菜单
+  "awardRecord": {
+    path: "/awardrecord",
+    component: () => import("@/views/gmtools/awardrecord/index"),
+    meta: {title: "发奖记录", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "announQuery": {
+    path: "/announquery",
+    component: () => import("@/views/gmtools/announquery/index"),
+    meta: {title: "公告查询", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "zoneAnnoun": {
+    path: "/zoneannoun",
+    component: () => import("@/views/gmtools/zoneannoun/index"),
+    meta: {title: "区服公告", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "zoneRewards": {
+    path: "/zonerewards",
+    component: () => import("@/views/gmtools/zonerewards/index"),
+    meta: {title: "区服奖励", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "homePage": {
+    path: "/homepage",
+    component: () => import("@/views/gmtools/homepage/index"),
+    meta: {title: "首页公告", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "playerAward": {
+    path: "/playeraward",
+    component: () => import("@/views/gmtools/playeraward/index"),
+    meta: {title: "玩家奖励", icon: "el-icon-help"}
+  },
+  /*==============礼包相关=============*/
+  // 一级菜单
+  "gifts": {
+    path: "/gifts",
+    component: Layout,
+    meta:{title: "礼包管理", icon: "el-icon-menu"}
+  },
+  // 二级菜单
+  "activeList": {
+    path: "/activelist",
+    component: () => import("@/views/gifts/activelist/index"),
+    meta: {title: "激活码列表", icon: "el-icon-help" }
+  },
+  // 二级菜单
+  "activeData": {
+    path: "/activedata",
+    component: () => import("@/views/gifts/activedata/index"),
+    meta: {title: "激活码数据", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "configPackage": {
+    path: "/configpackage",
+    component: () => import("@/views/gifts/configpackage/index"),
+    meta: {title: "配置礼包", icon: "el-icon-help"}
+  },
+  // ===============运维管理============
+  // 一级菜单
+  "devops": {
+    path: "/devops",
+    component: Layout,
+    meta: {title: "运维管理", icon: "el-icon-menu"}
+  },
+  // 二级菜单
+  "zoneList": {
+    path: "/zoneList",
+    component: () => import("@/views/devops/zonelist/index"),
+    meta: {title: "区服列表", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "sourceUp": {
+    path: "/sourceUp",
+    component: () => import("@/views/devops/sourceup/index"),
+    meta : {title: "资源更新", icon: "el-icon-help"}
+  }
+}
+
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
