@@ -38,6 +38,11 @@
         width="auto">
     </el-table-column>
     </el-table>
+     <!-- 分页 -->
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+      :current-page="page.num" :page-sizes="[10, 15, 20, 50, 100]" :page-size="page.size"
+      layout="total, sizes, prev, pager, next, jumper" :total="total">
+    </el-pagination>
   </div>
 </template>
 
