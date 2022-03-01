@@ -29,7 +29,7 @@
     </el-table-column>
     <el-table-column
         prop="percentNum"
-        label="总用户占比"
+        label="总用户占比(%)"
         width="auto">
     </el-table-column>
     </el-table>
@@ -38,6 +38,7 @@
 
 <script>
 import { GradeDist } from '@/api/operation'
+import { GradeDistNum } from '@/utils/operation'
 export default {
 data() {
   return {
@@ -71,12 +72,7 @@ data() {
     value: '',
     tableData: [],
     zone: '',
-    page: {
-      size: 10,
-      num: 1
-    },
-    total: 0,
-    listLoading: false
+    listLoading: false,
   }
 },
 methods: {
@@ -92,9 +88,17 @@ methods: {
     return '';
   },
   gradeDist() {
-    const data = {stime: this.value[0], etime: this.value[1], zone: this.zone, page: this.page}
+    const data = {stime: this.value[0], etime: this.value[1], zone: this.zone}
     GradeDist(data).then(response => {
-
+      let result = GradeDistNum(response.data.hits.hits)
+      for(let k in result) {
+        this.tableData.push({
+          grade: k,
+          gradeNum: result[k],
+          percentNum: (result[k]/response.data.hits.hits.length*100).toFixed(2)
+        }
+        )
+      }
     })
   }
 } 

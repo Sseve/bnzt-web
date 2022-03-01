@@ -38,11 +38,6 @@
         width="auto">
     </el-table-column>
     </el-table>
-    <!-- 分页 -->
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-      :current-page="page.num" :page-sizes="[10, 15, 20, 50, 100]" :page-size="page.size"
-      layout="total, sizes, prev, pager, next, jumper" :total="total">
-    </el-pagination>
   </div>
 </template>
 
@@ -81,12 +76,12 @@ data() {
       value: '',
       tableData: [],
       zone: '',
+      listLoading: false,
       page: {
         size: 10,
         num: 1
       },
-      total: 0,
-      listLoading: false
+      total: 0
   }
 },
 methods: {
@@ -113,6 +108,7 @@ methods: {
     const data = {stime: this.value[0], etime: this.value[1], zone: this.zone, page: this.page}
     this.listLoading = true
     Recharank(data).then(response => {
+      console.log(response.data)
       if (response.code === 200 && response.data.length !== 0) {
         this.tableData = []
         response.data.hits.hits.forEach(v => {
