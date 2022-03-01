@@ -57,7 +57,7 @@ export const asyncRoutes = {
   "user": {
     path: "/user",
     component: Layout,
-    meta: {title: "用户管理", icon: "el-icon-menu"}
+    meta: {title: "系统管理", icon: "el-icon-menu"}
   },
   // 二级菜单
   "用户列表": {

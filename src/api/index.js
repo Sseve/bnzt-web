@@ -28,7 +28,7 @@ export function getMoveRoute() {
 }
 
 // 添加用户
-export function addUser(data) {
+export function AddUser(data) {
   return request({
     url: '/user/api/users',
     method: 'post',
@@ -38,15 +38,16 @@ export function addUser(data) {
 }
 
 // 获取用户列表
-export function getUserLists() {
+export function GetUserLists() {
   return request({
-    url: '/user/api/users',
+    url: '/user/api/userlist',
     method: 'get'
   })
 }
 
 // 更新用户
-export function updateUser(data) {
+export function UpdateUser(data) {
+  console.log("xxbbbxxx",data)
   return request({
     url: "/user/api/users",
     method: "put",
@@ -55,7 +56,7 @@ export function updateUser(data) {
 }
 
 // 删除用户
-export function delUser(data) {
+export function DelUser(data) {
   return request({
     url: '/user/api/users',
     method: 'delete',
@@ -63,25 +64,16 @@ export function delUser(data) {
   })
 }
 
-// 用户分配角色
-export function userRole(data) {
-  return request({
-    url: '/user/api/users',
-    method: 'patch',
-    data
-  })
-}
-
 // 获取角色列表
-export function getRoleLists() {
+export function GetRoleList() {
   return request({
-    url: "/role/api/roles",
+    url: "/role/api/rolelist",
     method: "get"
   })
 }
 
 // 删除角色列表
-export function delRole(data) {
+export function DelRole(data) {
   return request({
     url: "/role/api/roles",
     method: "delete",
@@ -90,7 +82,7 @@ export function delRole(data) {
 }
 
 // 添加角色列表
-export function addRole(data) {
+export function AddRole(data) {
   return request({
     url: "/role/api/roles",
     method: "post",
@@ -98,25 +90,16 @@ export function addRole(data) {
   })
 }
 
-// 角色分配权限
-export function rolePermisson(data) {
-  return request({
-    url: "/role/api/roles",
-    method: "patch",
-    data
-  })
-}
-
 // 获取菜单列表
-export function getPermLists() {
+export function GetPermList() {
   return request({
-    url: "/perm/api/perms",
+    url: "/perm/api/permlist",
     method: "get"
   })
 }
 
 // 删除菜单
-export function delPerm(data) {
+export function DelPerm(data) {
   return request({
     url: "/perm/api/perms",
     method: "delete",
@@ -125,7 +108,7 @@ export function delPerm(data) {
 }
 
 // 添加菜单
-export function addPerm(data) {
+export function AddPerm(data) {
   return request({
     url: "/perm/api/perms",
     method: "post",
