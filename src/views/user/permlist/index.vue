@@ -10,7 +10,7 @@
     :before-close="handleClose">
       <el-form>
         <el-form-item label="权限名称" label-width="auto">
-          <el-input v-model="form.name" autocomplete="off" placeholder="[user,operation,player]"></el-input>
+          <el-input v-model="form.permdesc" autocomplete="off" placeholder="[user,operation,player]"></el-input>
         </el-form-item>
         <el-form-item label="父 路 径" label-width="auto">
           <el-input v-model="form.namepath" autocomplete="off" placeholder="[/user,/operation,/player]"></el-input>
@@ -19,7 +19,7 @@
           <el-input v-model="form.subdesc" autocomplete="off" placeholder="[用户列表,角色列表,...]"></el-input>
         </el-form-item>
         <el-form-item label="子 路 径" label-width="auto">
-          <el-input v-model="form.subdesc" autocomplete="off" placeholder="[/user, /role, /perm]"></el-input>
+          <el-input v-model="form.subpath" autocomplete="off" placeholder="[/user, /role, /perm]"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -73,7 +73,7 @@ data() {
     tableData: [],
     dialogVisible: false,
     form: {
-      name: '',
+      permdesc: '',
       namepath: '',
       subdesc: '',
       subpath: ''
@@ -98,21 +98,21 @@ methods: {
   permList() {
     GetPermList().then(response => {
       response.data.forEach(v => {
-        this.tableData.push({id: v.ID, name: v.Permdesc, mmenu: v.Namepath, smenu: v.Subpath})
+        this.tableData.push({id: v.ID, permdesc: v.Permdesc, mmenu: v.Namepath, smenu: v.Subpath})
       })
     })
   },
   addPerm() {
-    this.$confirm("是否添加" + this.form.name, "提示", {
+    this.$confirm("是否添加" + this.form.permdesc, "提示", {
       confirmButtonText: "是",
       cancelButtonText: "否",
       type: "warning"
     }).then(() => {
       AddPerm(this.form).then(response => {
         if (response.code === 200) {
-          this.$message({message: "添加权限: " + this.form.name + " 成功!", type: "success"})
+          this.$message({message: "添加权限: " + this.form.permdesc + " 成功!", type: "success"})
         } else {
-          this.$message({message: "添加权限: " + this.form.name + " 失败!", type: "warning"})
+          this.$message({message: "添加权限: " + this.form.permdesc + " 失败!", type: "warning"})
         }
         this.dialogVisible = false
       })

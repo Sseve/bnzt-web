@@ -4,8 +4,7 @@
       v-model="value"
       type="daterange"
       size="small"
-      align="center"
-      unlink-panels
+      align="right"
       format="yyyy-MM-dd"
       range-separator="至"
       start-placeholder="开始日期"

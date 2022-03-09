@@ -227,16 +227,22 @@ export const asyncRoutes = {
     meta: {title: "运维管理", icon: "el-icon-menu"}
   },
   // 二级菜单
-  "zoneList": {
-    path: "/zoneList",
+  "区服列表": {
+    path: "/zonelist",
     component: () => import("@/views/devops/zonelist/index"),
     meta: {title: "区服列表", icon: "el-icon-help"}
   },
   // 二级菜单
-  "sourceUp": {
-    path: "/sourceUp",
+  "资源更新": {
+    path: "/sourceup",
     component: () => import("@/views/devops/sourceup/index"),
-    meta : {title: "资源更新", icon: "el-icon-help"}
+    meta: {title: "资源更新", icon: "el-icon-help"}
+  },
+  // 二级菜单
+  "主机状态": {
+    path: "/hostlist",
+    component: () => import("@/views/devops/hostlist/index"),
+    meta: {title: "主机状态", icon: "el-icon-help"}
   }
 }
 

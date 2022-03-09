@@ -17,6 +17,7 @@ const mutations = {
 const actions = {
   menusToRoutes({ commit }, data) {
     return new Promise(resolve => {
+      // console.log("xxx", data)
       const menus = []
       menus.push({
         path: '/404',
@@ -27,8 +28,8 @@ const actions = {
           redirect: '/404',
           hidden: true
       })
-      // console.log(data)
-      const mainMenu = ['user',, 'operation', 'player']
+      // 将需要的菜单添加到mainMenu列表中
+      const mainMenu = ['user', 'operation', 'player', 'devops']
       mainMenu.forEach(Mmenu => {
           const main = asyncRoutes[Mmenu]
           main.children = []

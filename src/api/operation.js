@@ -17,3 +17,12 @@ export function GradeDist(data) {
         data
     })
 }
+
+// 数据查询
+export function CountData(data) {
+    return request({
+        url: '/oa/api/countdata',
+        method: 'post',
+        data
+    })
+}
