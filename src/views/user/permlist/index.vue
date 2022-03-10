@@ -97,8 +97,9 @@ methods: {
   },
   permList() {
     GetPermList().then(response => {
+      // console.log(response.data)
       response.data.forEach(v => {
-        this.tableData.push({id: v.ID, permdesc: v.Permdesc, mmenu: v.Namepath, smenu: v.Subpath})
+        this.tableData.push({id: v.ID, name: v.Permdesc, mmenu: v.Namepath, smenu: v.Subpath})
       })
     })
   },

@@ -32,8 +32,10 @@
       </span>
     </el-dialog>
     <el-table
+    v-loading="loading"
     ref="multipleTable"
     :data="tableData"
+    :key="ishow"
     tooltip-effect="dark"
     style="width: 100%; margin-top: 20px"
     @selection-change="handleSelectionChange"
@@ -42,7 +44,7 @@
       <el-table-column prop="zone" label="区服ID" width="auto"> </el-table-column>
       <el-table-column prop="channame" label="区服名称" width="auto"></el-table-column>
       <el-table-column prop="ip" label="区服IP" width="auto"> </el-table-column>
-      <el-table-column prop="combine" label="合服标记" width="auto"></el-table-column>
+      <!-- <el-table-column prop="combine" label="合服标记" width="auto"></el-table-column> -->
       <el-table-column prop="state" label="结果状态" width="auto"></el-table-column>
     </el-table>
   </div>
@@ -53,6 +55,7 @@ import { ZoneList, AddZone, ManZone } from "@/api/zone";
 export default {
   data() {
     return {
+      ishow: true,
       tableData: [],
       vtarget: "",
       dialogZoneVisible: false,
@@ -85,7 +88,8 @@ export default {
           label: "UpdateBin",
         },
       ],
-    };
+      loading: false
+    }
   },
   created() {
     this.zoneList()
@@ -94,7 +98,7 @@ export default {
     handleClose(done) {
       done();
     },
-    tableRowClassName({ row, rowIndex }) {
+    tableRowClassName(row, rowIndex) {
       if (rowIndex % 2 === 1) {
         return "warning-row"
       } else if (rowIndex % 2 === 0) {
@@ -122,7 +126,6 @@ export default {
             zone: v.Zone,
             channame: v.ChanName,
             ip: v.Ip,
-            combine: v.DeletedAt,
             state: ''
           })
         })
@@ -164,22 +167,20 @@ export default {
         const data = {"zones": this.multipleSelection}
         ManZone(data).then((response) => {
           // console.log(response)
-          const newdata = []
-          response.data.forEach(v => {
-            this.multipleSelection.forEach(x => {
-              if (v.ChanName === x.channame && v.Zone === x.zone) {
-                newdata.push({
-                  zone: x.zone,
-                  channame: x.channame,
-                  ip: x.ip,
-                  combine: x.combine,
-                  state: v.Msg
-                })
-              }
+          if (response.code === 200) {
+            this.loading = true
+            response.data.forEach(x => {
+              this.tableData.forEach(y => {
+                if (x.ChanName === y.channame && x.Zone === y.zone) {
+                  y.state = x.Msg
+                }
+              })
             })
-          })
-          // console.log(newdata)
-          this.tableData = newdata
+            this.loading = false
+            this.ishow = !this.ishow
+          } else {
+            console.log(response.message)
+          }
         })
       })
     }
