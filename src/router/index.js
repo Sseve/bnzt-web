@@ -233,12 +233,6 @@ export const asyncRoutes = {
     meta: {title: "区服列表", icon: "el-icon-help"}
   },
   // 二级菜单
-  "资源更新": {
-    path: "/sourceup",
-    component: () => import("@/views/devops/sourceup/index"),
-    meta: {title: "资源更新", icon: "el-icon-help"}
-  },
-  // 二级菜单
   "主机状态": {
     path: "/hostlist",
     component: () => import("@/views/devops/hostlist/index"),

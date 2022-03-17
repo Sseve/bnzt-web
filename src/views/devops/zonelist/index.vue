@@ -165,10 +165,10 @@ export default {
         type: "warning",
       }).then(() => {
         const data = {"zones": this.multipleSelection}
+        this.loading = true
         ManZone(data).then((response) => {
           // console.log(response)
           if (response.code === 200) {
-            this.loading = true
             response.data.forEach(x => {
               this.tableData.forEach(y => {
                 if (x.ChanName === y.channame && x.Zone === y.zone) {
