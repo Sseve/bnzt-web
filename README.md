@@ -1,42 +1,40 @@
-# bnzt-web
+#### bnzt-web
 
-## Build Setup
-
-```bash
-# enter the project directory
-cd bnzt-web
-
-# install dependency
-npm install
-
-# develop
-npm run dev
+* **部署**
+```
+  - 修改vue.config.js中的publicPath的值为: './'
+  - 修改rouuter/index.js中的createRouter函数中的mode为: 'hash'
+  - 打包:
+    npm run build:prod
 ```
 
-This will automatically open http://localhost:9528
-
-## Build
-
-```bash
-# build for test environment
-npm run build:stage
-
-# build for production environment
-npm run build:prod
+* **nginx配置**
 ```
+server {
+    listen  8886;
+    location /bnzt {
+        root  /var/www/html;
+        index  index.html;
+        try_files $uri $uri/ /index.html;
+        add_header Access-Control-Allow-Methods "*";
+        add_header Access-Control-Allow-Headers "*";
+        autoindex  on;
+        autoindex_exact_size  on;
+        autoindex_localtime  on;
+    }
+    location /user/api/ {
+           proxy_pass http://127.0.0.1:8888;
+        }
+        location /zone/api/ {
+           proxy_pass http://127.0.0.1:8888;
+        }
+        error_page 404 /404.html;
+        location = /404.html {
+        }
 
-## Advanced
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+}
 
-```bash
-# preview the release environment effect
-npm run preview
-
-# preview the release environment effect + static resource analysis
-npm run preview -- --report
-
-# code format check
-npm run lint
-
-# code format check and auto fix
-npm run lint -- --fix
 ```
