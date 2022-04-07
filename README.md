@@ -23,19 +23,16 @@ server {
         autoindex_exact_size  on;
         autoindex_localtime  on;
     }
-    location /user/api/ {
-           proxy_pass http://127.0.0.1:8888;
-        }
-        location /zone/api/ {
-           proxy_pass http://127.0.0.1:8888;
-        }
-        error_page 404 /404.html;
-        location = /404.html {
-        }
+    location ~*/api/ {
+      proxy_pass http://127.0.0.1:8888;
+    }
+    error_page 404 /404.html;
+    location = /404.html {
+    }
 
-        error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-        }
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+    }
 }
 
 ```
