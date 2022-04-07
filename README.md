@@ -6,6 +6,7 @@
   - 修改rouuter/index.js中的createRouter函数中的mode为: 'hash'
   - 打包:
     npm run build:prod
+  - 部署到服务器的/var/www/html目录下
 ```
 
 * **nginx配置**
