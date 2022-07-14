@@ -87,6 +87,10 @@ export default {
           value: "选项5",
           label: "UpdateBin",
         },
+        {
+          value: "选项6",
+          label: "Reload"
+        }
       ],
       loading: false
     }

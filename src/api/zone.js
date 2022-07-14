@@ -28,3 +28,13 @@ export function ManZone(data) {
         timeout: 600000
     })
 }
+
+// 获取主机资源
+export function GetHostData(data) {
+    return request({
+        url: "/zone/api/host",
+        method: "post",
+        data: data,
+        timeout: 600000
+    })
+}

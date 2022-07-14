@@ -63,15 +63,7 @@ methods: {
   gradeDist() {
     const data = {stime: this.value[0], etime: this.value[1], zone: this.zone}
     GradeDist(data).then(response => {
-      let result = GradeDistNum(response.data.hits.hits)
-      for(let k in result) {
-        this.tableData.push({
-          grade: k,
-          gradeNum: result[k],
-          percentNum: (result[k]/response.data.hits.hits.length*100).toFixed(2)
-        }
-        )
-      }
+      console.log(response)
     })
   }
 } 

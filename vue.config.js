@@ -40,8 +40,8 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'http://ip:port',
-        target: 'http://159.75.220.163:8888',
-        // target: 'http://172.16.9.127:8880',
+        // target: 'http://127.0.0.1:8888',
+        target: 'http://172.16.9.127:8880',
         changOrigin: true,
         pathRewrite: {
           '^/api': '/'
